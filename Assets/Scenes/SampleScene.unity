@@ -1437,5 +1437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7b12ba54511774fb040643b5b5380d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mergeEffect: {fileID: 6289383562537114726, guid: f67ddf4342deef344bf6541da8381ede,
+    type: 3}
   _uiController: {fileID: 317228789}
   _scoresCount: 0

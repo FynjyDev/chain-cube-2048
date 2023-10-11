@@ -66,7 +66,7 @@ public class BlockSpawnController : MonoBehaviour
         Destroy(block_1.gameObject);
         Destroy(block_2.gameObject);
 
-        _progressController.OnMerge(blockData.BlockCount);
+        _progressController.OnMerge(blockData.BlockCount, blockData.BlockName, middlePos);
 
         SpawnNewBlock(blockData, middlePos);
     }
