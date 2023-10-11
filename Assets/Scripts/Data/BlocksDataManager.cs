@@ -17,4 +17,13 @@ public class BlocksDataManager : ScriptableObject
     {
         return _blockDatas[Random.Range(0, _blockDatas.Count)];
     }
+
+    public BlockData GetDataByCount(int count)
+    {
+        foreach (BlockData bD in _blockDatas)
+            if (bD.BlockCount == count)
+                return bD;
+
+        return null;
+    }
 }

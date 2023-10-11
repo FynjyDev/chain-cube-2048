@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BlockShootingController : MonoBehaviour
 {
-    private NumberBlock _currentNumberBlock;
+    private NumberBlock _currentBlock;
 
     [SerializeField]
     private BlockSpawnController _blockSpawnController;
@@ -22,7 +22,7 @@ public class BlockShootingController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (!_currentNumberBlock) return;
+        if (!_currentBlock) return;
 
         if (Input.GetMouseButton(0)) Aim();
         else Shoot();
@@ -30,7 +30,7 @@ public class BlockShootingController : MonoBehaviour
 
     public void SetNumberBlock(NumberBlock block)
     {
-        _currentNumberBlock = block;
+        _currentBlock = block;
     }
 
     private void Aim()
@@ -38,9 +38,9 @@ public class BlockShootingController : MonoBehaviour
         Vector3 mousePosition = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0);
         float offsetX = mousePosition.x * _aimMoveSpeed;
 
-        Vector3 pos = new Vector3(Mathf.Clamp(_currentNumberBlock.transform.position.x + offsetX, -_aimLimit.x, _aimLimit.x), 0, 0);
+        Vector3 pos = new Vector3(Mathf.Clamp(_currentBlock.transform.position.x + offsetX, -_aimLimit.x, _aimLimit.x), 0, 0);
 
-        _currentNumberBlock.transform.position = pos;
+        _currentBlock.transform.position = pos;
         _isAlreadyAim = true;
     }
 
@@ -48,8 +48,10 @@ public class BlockShootingController : MonoBehaviour
     {
         if (!_isAlreadyAim) return;
 
-        _currentNumberBlock.NumberBlockBody.AddForce(_shootForce);
-        _currentNumberBlock = null;
+        _currentBlock.ChangeRigidbodyState(true);
+
+        _currentBlock.NumberBlockBody.AddForce(_shootForce);
+        _currentBlock = null;
 
         _isAlreadyAim = false;
 

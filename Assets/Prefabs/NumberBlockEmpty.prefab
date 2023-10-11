@@ -561,6 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NumberBlockBody: {fileID: 5729370649914927864}
   BlockRenderer: {fileID: 5729370650469791152}
+  BlockCollider: {fileID: 5729370649914927865}
   _blockCountNumbersTexts:
   - {fileID: 1316641939147111312}
   - {fileID: 3383291527980365817}
@@ -568,6 +569,7 @@ MonoBehaviour:
   - {fileID: 8514383295031876693}
   - {fileID: 7171411340072109839}
   - {fileID: 266710979746409064}
+  holdBlock: 0
 --- !u!65 &5729370649914927865
 BoxCollider:
   m_ObjectHideFlags: 0
