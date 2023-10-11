@@ -11,8 +11,12 @@ public class BlockSpawnController : MonoBehaviour
 
     [Space(15)]
 
-    [SerializeField]
-    private float _blockAnimationSpeed;
+    [SerializeField] private Vector3 _minMergeForce = new Vector3(0, 25f, 0);
+    [SerializeField] private Vector3 _maxMergeForce = new Vector3(25f, 50f, 25f);
+
+    [Space(15)]
+
+    [SerializeField] private float _blockAnimationSpeed;
 
     [Space(15)]
 
@@ -42,7 +46,13 @@ public class BlockSpawnController : MonoBehaviour
     {
         NumberBlock block = Instantiate(_numberBlockPrefab, position, Quaternion.identity, _blockSpawnPosition);
 
+        float xForce = Random.Range(_minMergeForce.x, _maxMergeForce.x); 
+        float yForce = Random.Range(_minMergeForce.y, _maxMergeForce.y); 
+        float zForce = Random.Range(_minMergeForce.z, _maxMergeForce.z); 
+
+        block.NumberBlockBody.AddForce(new Vector3(xForce, yForce, zForce));
         block.OnBlockSpawned(blockData, this);
+
         _blocks.Add(block);
     }
 

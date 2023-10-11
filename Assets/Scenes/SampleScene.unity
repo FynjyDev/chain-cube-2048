@@ -172,6 +172,8 @@ MonoBehaviour:
     type: 3}
   _blocksDataManager: {fileID: 11400000, guid: 8bff29331ef42344a870a7d9150e8a49, type: 2}
   _blockSpawnPosition: {fileID: 248305164}
+  _minMergeForce: {x: 50, y: 70, z: 50}
+  _maxMergeForce: {x: 100, y: 150, z: 100}
   _blockAnimationSpeed: 0.2
   _blocks: []
 --- !u!1 &330585543
