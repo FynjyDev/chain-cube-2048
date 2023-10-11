@@ -5,9 +5,8 @@ using UnityEngine;
 public class BlockSpawnController : MonoBehaviour
 {
     [SerializeField] private BlockShootingController _blockShootingController;
-    [SerializeField] private NumberBlock _numberBlockPrefab;
+    [SerializeField] private ProgressController _progressController;
     [SerializeField] private BlocksDataManager _blocksDataManager;
-    [SerializeField] private Transform _blockSpawnPosition;
 
     [Space(15)]
 
@@ -32,7 +31,7 @@ public class BlockSpawnController : MonoBehaviour
 
     public void SpawnNewBlock()
     {
-        NumberBlock block = Instantiate(_numberBlockPrefab, _blockSpawnPosition.position, _blockSpawnPosition.rotation, _blockSpawnPosition);
+        NumberBlock block = Instantiate(_blocksDataManager._blockPrefab, Vector3.zero, Quaternion.identity, transform);
 
         block.OnBlockSpawned(_blocksDataManager.GetRandomBlockData(), this);
         block.ChangeRigidbodyState(false);
@@ -44,7 +43,7 @@ public class BlockSpawnController : MonoBehaviour
 
     public void SpawnNewBlock(BlockData blockData, Vector3 position)
     {
-        NumberBlock block = Instantiate(_numberBlockPrefab, position, Quaternion.identity, _blockSpawnPosition);
+        NumberBlock block = Instantiate(_blocksDataManager._blockPrefab, position, Quaternion.identity, transform);
 
         float xForce = Random.Range(_minMergeForce.x, _maxMergeForce.x); 
         float yForce = Random.Range(_minMergeForce.y, _maxMergeForce.y); 
@@ -66,6 +65,8 @@ public class BlockSpawnController : MonoBehaviour
 
         Destroy(block_1.gameObject);
         Destroy(block_2.gameObject);
+
+        _progressController.OnMerge(blockData.BlockCount);
 
         SpawnNewBlock(blockData, middlePos);
     }

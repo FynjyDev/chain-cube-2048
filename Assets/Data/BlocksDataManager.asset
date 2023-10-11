@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73cf53cc660893d488e7efcae5cbba2d, type: 3}
   m_Name: BlocksDataManager
   m_EditorClassIdentifier: 
+  _blockPrefab: {fileID: -6321888085549077405, guid: 989528bd23dd4c544990a08a4274e388,
+    type: 3}
   _blockDatas:
   - {fileID: 11400000, guid: 0d5f109ff34a81247b402d8a6cb2f3ba, type: 2}
   - {fileID: 11400000, guid: 1389fb031738bba418c9ff1bd2059ab6, type: 2}

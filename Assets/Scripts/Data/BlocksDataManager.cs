@@ -6,6 +6,7 @@ public class BlocksDataManager : ScriptableObject
 {
     public enum BlockTypes {number, rainbow , bomb  }
 
+    public NumberBlock _blockPrefab;
     [SerializeField] private List<BlockData> _blockDatas;
 
     public List<BlockData> GetAllBlockDatas()
