@@ -5,6 +5,9 @@ public class BlockShootingController : MonoBehaviour
     private NumberBlock _currentNumberBlock;
 
     [SerializeField]
+    private BlockSpawnController _blockSpawnController;
+
+    [SerializeField]
     private float _aimMoveSpeed = 0.2f;
 
     [Space(25)]
@@ -49,5 +52,7 @@ public class BlockShootingController : MonoBehaviour
         _currentNumberBlock = null;
 
         _isAlreadyAim = false;
+
+        _blockSpawnController.SpawnNewBlock();
     }
 }

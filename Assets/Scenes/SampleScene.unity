@@ -167,6 +167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a43e32b8583b943825db317b114ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blockShootingController: {fileID: 950496385}
+  _numberBlockPrefab: {fileID: -6321888085549077405, guid: 989528bd23dd4c544990a08a4274e388,
+    type: 3}
+  _blockSpawnPosition: {fileID: 248305164}
+  _blockAnimationSpeed: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,9 +694,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94839096647c3494d8aee3e124617033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blockSpawnController: {fileID: 248305165}
   _aimMoveSpeed: 0.2
   _aimLimit: {x: 1.5, y: 0, z: 0}
-  _shootForce: {x: 0, y: 0, z: 700}
+  _shootForce: {x: 0, y: 0, z: 400}
 --- !u!1 &1063189712
 GameObject:
   m_ObjectHideFlags: 0
