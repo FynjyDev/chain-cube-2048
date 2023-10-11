@@ -11,6 +11,9 @@ public class BlockSpawnController : MonoBehaviour
     private NumberBlock _numberBlockPrefab;
 
     [SerializeField]
+    private BlocksDataManager _blocksDataManager;
+
+    [SerializeField]
     private Transform _blockSpawnPosition;
 
     [SerializeField]
@@ -30,6 +33,7 @@ public class BlockSpawnController : MonoBehaviour
     {
         NumberBlock block = Instantiate(_numberBlockPrefab, _blockSpawnPosition.position, _blockSpawnPosition.rotation, _blockSpawnPosition);
 
+        block.OnBlockSpawned(_blocksDataManager.GetRandomBlockData());
         _blocks.Add(block);
 
         _currentBlockScaleAnimation = StartCoroutine(BlockScaleAnimatior(block, _blockAnimationSpeed));

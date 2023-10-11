@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1904450884915461799
 RectTransform:
@@ -151,7 +151,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1708412707934079294
 RectTransform:
@@ -392,7 +392,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1868022536527359881
 RectTransform:
@@ -560,6 +560,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NumberBlockBody: {fileID: 5729370649914927864}
+  BlockRenderer: {fileID: 5729370650469791152}
+  _blockCountNumbersTexts:
+  - {fileID: 1316641939147111312}
+  - {fileID: 3383291527980365817}
+  - {fileID: 7968387080684201025}
+  - {fileID: 8514383295031876693}
+  - {fileID: 7171411340072109839}
+  - {fileID: 266710979746409064}
 --- !u!65 &5729370649914927865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -688,7 +696,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &6201083003561896279
 RectTransform:
@@ -823,7 +831,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &2006409736096381398
 RectTransform:
@@ -958,7 +966,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &6220289572800856159
 RectTransform:
