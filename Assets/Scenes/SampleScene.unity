@@ -172,6 +172,7 @@ MonoBehaviour:
     type: 3}
   _blockSpawnPosition: {fileID: 248305164}
   _blockAnimationSpeed: 1
+  _blocks: []
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
