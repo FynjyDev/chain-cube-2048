@@ -11,6 +11,11 @@ public class ProgressController : MonoBehaviour
     [SerializeField]
     private int _scoresCount;
 
+    public void Init(int scores)
+    {
+        UpdateScoresCount(scores);
+    }
+
     public void OnMerge(int mergeScores, string name, Vector3 mergePos)
     {
         MergeEffect effect = Instantiate(_mergeEffect, mergePos, Quaternion.identity, transform);
@@ -19,9 +24,14 @@ public class ProgressController : MonoBehaviour
         UpdateScoresCount(mergeScores);
     }
 
-    private void UpdateScoresCount(int mergeScores)
+    private void UpdateScoresCount(int newScores)
     {
-        _scoresCount += mergeScores;
+        _scoresCount += newScores;
         _uiController.UpdateScoresCount(_scoresCount);
+    }
+
+    public int GetScores()
+    {
+        return _scoresCount;
     }
 }

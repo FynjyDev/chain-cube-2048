@@ -24,20 +24,29 @@ public class BlockSpawnController : MonoBehaviour
 
     private Coroutine _currentBlockScaleAnimation;
 
-    private void OnEnable()
+    public void Init(List<BlockSaveData> blockSaveData)
     {
-        GameStateController.OnGameStart += SpawnNewBlock;
+        foreach (BlockSaveData data in blockSaveData) CreateBlock(data.MapBlocksPosition, data.MapBlockData);            
+        SpawnNewBlock();
+    }
+
+    public NumberBlock CreateBlock(Vector3 pos = new Vector3(), BlockData blockData = null, bool rigidbodyState = true)
+    {
+        NumberBlock block = Instantiate(_blocksDataManager._blockPrefab, pos, Quaternion.identity, transform);
+
+        block.OnBlockSpawned(blockData, this);
+        block.ChangeRigidbodyState(rigidbodyState);
+
+        _blocks.Add(block);
+
+        return block;
     }
 
     public void SpawnNewBlock()
     {
-        NumberBlock block = Instantiate(_blocksDataManager._blockPrefab, Vector3.zero, Quaternion.identity, transform);
         BlockData blockData = _blocksDataManager.GetDataByPlayerProgress(_blocks);
 
-        block.OnBlockSpawned(blockData, this);
-        block.ChangeRigidbodyState(false);
-
-        _blocks.Add(block);
+        NumberBlock block = CreateBlock(Vector3.zero, blockData, false);
 
         _currentBlockScaleAnimation = StartCoroutine(BlockScaleAnimatior(block, _blockAnimationSpeed));
     }
@@ -100,8 +109,8 @@ public class BlockSpawnController : MonoBehaviour
         StopCoroutine(_currentBlockScaleAnimation);
     }
 
-    private void OnDisable()
+    public List<NumberBlock> GetMapBlocks()
     {
-        GameStateController.OnGameStart -= SpawnNewBlock;
+        return _blocks;
     }
 }

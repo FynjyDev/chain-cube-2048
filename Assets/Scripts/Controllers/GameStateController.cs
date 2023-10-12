@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class GameStateController : MonoBehaviour
 {
+    public BlockShootingController BlockShootingController;
+    public BlockSpawnController BlockSpawnController;
+    public ProgressController ProgressController;
+    public SaveLoadController SaveLoadController;
+
     public static event Action OnGameStart;
+    public static event Action OnDataLoad;
+    public static event Action OnGameQuit;
 
     public void Awake()
     {
@@ -14,6 +21,14 @@ public class GameStateController : MonoBehaviour
 
     public void StartGame()
     {
-        OnGameStart?.Invoke();
+        SaveDataStructure saveData = SaveLoadController.Load();
+       
+        ProgressController.Init(saveData == null ? 0 : saveData.CurrentScores);
+        BlockSpawnController.Init(saveData == null ? new List<BlockSaveData>() : saveData.BlockSaveData);
+    }
+
+    public void OnApplicationQuit()
+    {
+        OnGameQuit?.Invoke();
     }
 }

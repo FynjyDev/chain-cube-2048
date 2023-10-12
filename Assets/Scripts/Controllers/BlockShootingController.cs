@@ -33,6 +33,7 @@ public class BlockShootingController : MonoBehaviour
     public void SetNumberBlock(NumberBlock block)
     {
         _currentBlock = block;
+        _currentBlock.isAiming = true;
     }
 
     private void Aim()
@@ -55,6 +56,7 @@ public class BlockShootingController : MonoBehaviour
         _currentBlock.ChangeRigidbodyState(true);
 
         _currentBlock.NumberBlockBody.AddForce(_shootForce);
+        _currentBlock.isAiming = false;
         _currentBlock = null;
 
         _isAlreadyAim = false;

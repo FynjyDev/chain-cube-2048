@@ -16,6 +16,7 @@ public class NumberBlock : MonoBehaviour
     private BlockData _blockData;
 
     public bool holdBlock;
+    public bool isAiming;
 
     public void OnBlockSpawned(BlockData blockData, BlockSpawnController blockSpawnController)
     {
