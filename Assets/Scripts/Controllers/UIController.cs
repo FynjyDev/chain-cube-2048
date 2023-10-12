@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
 
     public void UpdateScoresCount(int scores)
     {
-        _scoreText.text = scores.ToString();
+        string format = "#,###,###";
+        _scoreText.text = scores.ToString(format);
     }
 }
