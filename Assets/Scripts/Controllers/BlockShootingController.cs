@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class BlockShootingController : MonoBehaviour
 {
-    private NumberBlock _currentBlock;
-
-    [SerializeField] private BlockSpawnController _blockSpawnController;
     [SerializeField] private Transform _aim;
 
     [SerializeField]
@@ -18,7 +15,22 @@ public class BlockShootingController : MonoBehaviour
     [SerializeField]
     private Vector3 _shootForce = new Vector3(0, 0, 100f);
 
+    private BlockSpawnController _blockSpawnController;
+    private DeadLine _deadLine;
+    private NumberBlock _currentBlock;
+
     private bool _isAlreadyAim;
+
+    private void OnEnable()
+    {
+        GameStateController.OnGameEnd += DisableAim;
+    }
+
+    public void Init(BlockSpawnController blockSpawnController, DeadLine deadLine)
+    {
+        _blockSpawnController = blockSpawnController;
+        _deadLine = deadLine;
+    }
 
     public void FixedUpdate()
     {
@@ -33,6 +45,8 @@ public class BlockShootingController : MonoBehaviour
     public void SetNumberBlock(NumberBlock block)
     {
         _currentBlock = block;
+
+        _deadLine.SetIgnoreBlock(_currentBlock);
         _currentBlock.isAiming = true;
     }
 
@@ -62,5 +76,15 @@ public class BlockShootingController : MonoBehaviour
         _isAlreadyAim = false;
 
         _blockSpawnController.SpawnNewBlock();
+    }
+
+    private void DisableAim()
+    {
+        _aim.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        GameStateController.OnGameEnd -= DisableAim;
     }
 }

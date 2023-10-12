@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class BlockSpawnController : MonoBehaviour
 {
-    [SerializeField] private BlockShootingController _blockShootingController;
-    [SerializeField] private ProgressController _progressController;
-    [SerializeField] private BlocksDataManager _blocksDataManager;
-
-    [Space(15)]
-
     [SerializeField] private Vector3 _minMergeForce = new Vector3(0, 25f, 0);
     [SerializeField] private Vector3 _maxMergeForce = new Vector3(25f, 50f, 25f);
 
@@ -23,14 +17,34 @@ public class BlockSpawnController : MonoBehaviour
     private List<NumberBlock> _blocks;
 
     private Coroutine _currentBlockScaleAnimation;
+    private BlockShootingController _blockShootingController;
+    private ProgressController _progressController;
+    private BlocksDataManager _blocksDataManager;
 
-    public void Init(List<BlockSaveData> blockSaveData)
+    private void OnEnable()
     {
+        GameStateController.OnGameEnd += ClearMap;
+    }
+
+    public void Init(List<BlockSaveData> blockSaveData, BlockShootingController shootingController, ProgressController progressController, BlocksDataManager dataManager)
+    {
+        _blockShootingController = shootingController;
+        _progressController = progressController;
+        _blocksDataManager = dataManager;
+
         foreach (BlockSaveData data in blockSaveData) CreateBlock(data.MapBlocksPosition, data.MapBlockData);            
         SpawnNewBlock();
     }
 
-    public NumberBlock CreateBlock(Vector3 pos = new Vector3(), BlockData blockData = null, bool rigidbodyState = true)
+    private void ClearMap()
+    {
+        for (int i = 0; i < _blocks.Count; i++)
+            Destroy(_blocks[i].gameObject);
+
+        _blocks.Clear();
+    }
+
+    private NumberBlock CreateBlock(Vector3 pos = new Vector3(), BlockData blockData = null, bool rigidbodyState = true)
     {
         NumberBlock block = Instantiate(_blocksDataManager._blockPrefab, pos, Quaternion.identity, transform);
 
@@ -112,5 +126,10 @@ public class BlockSpawnController : MonoBehaviour
     public List<NumberBlock> GetMapBlocks()
     {
         return _blocks;
+    }
+
+    private void OnDisable()
+    {
+        GameStateController.OnGameEnd -= ClearMap;
     }
 }

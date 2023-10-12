@@ -11,9 +11,19 @@ public class ProgressController : MonoBehaviour
     [SerializeField]
     private int _scoresCount;
 
+    private void OnEnable()
+    {
+        GameStateController.OnGameEnd += OnGameEnd;
+    }
+
     public void Init(int scores)
     {
         UpdateScoresCount(scores);
+    }
+
+    private void OnGameEnd()
+    {
+        _scoresCount = 0;
     }
 
     public void OnMerge(int mergeScores, string name, Vector3 mergePos)
@@ -34,4 +44,10 @@ public class ProgressController : MonoBehaviour
     {
         return _scoresCount;
     }
+
+    private void OnDisable()
+    {
+        GameStateController.OnGameEnd -= OnGameEnd;
+    }
+
 }

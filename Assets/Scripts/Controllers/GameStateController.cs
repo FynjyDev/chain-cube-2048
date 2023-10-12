@@ -1,17 +1,18 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameStateController : MonoBehaviour
 {
+    public BlocksDataManager BlocksDataManager;
     public BlockShootingController BlockShootingController;
     public BlockSpawnController BlockSpawnController;
     public ProgressController ProgressController;
     public SaveLoadController SaveLoadController;
+    public DeadLine DeadLine;
 
     public static event Action OnGameStart;
-    public static event Action OnDataLoad;
+    public static event Action OnGameEnd;
     public static event Action OnGameQuit;
 
     public void Awake()
@@ -22,9 +23,16 @@ public class GameStateController : MonoBehaviour
     public void StartGame()
     {
         SaveDataStructure saveData = SaveLoadController.Load();
-       
+
+        DeadLine.Init(this);
+        BlockShootingController.Init(BlockSpawnController, DeadLine);
         ProgressController.Init(saveData == null ? 0 : saveData.CurrentScores);
-        BlockSpawnController.Init(saveData == null ? new List<BlockSaveData>() : saveData.BlockSaveData);
+        BlockSpawnController.Init(saveData == null ? new List<BlockSaveData>() : saveData.BlockSaveData, BlockShootingController, ProgressController, BlocksDataManager);
+    }
+
+    public void GameLose()
+    {
+        OnGameEnd?.Invoke();
     }
 
     public void OnApplicationQuit()
