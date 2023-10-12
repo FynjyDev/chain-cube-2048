@@ -4,8 +4,8 @@ public class BlockShootingController : MonoBehaviour
 {
     private NumberBlock _currentBlock;
 
-    [SerializeField]
-    private BlockSpawnController _blockSpawnController;
+    [SerializeField] private BlockSpawnController _blockSpawnController;
+    [SerializeField] private Transform _aim;
 
     [SerializeField]
     private float _aimMoveSpeed = 0.2f;
@@ -24,6 +24,8 @@ public class BlockShootingController : MonoBehaviour
     {
         if (!_currentBlock) return;
 
+        _aim.gameObject.SetActive(Input.GetMouseButton(0));
+
         if (Input.GetMouseButton(0)) Aim();
         else Shoot();
     }
@@ -41,6 +43,8 @@ public class BlockShootingController : MonoBehaviour
         Vector3 pos = new Vector3(Mathf.Clamp(_currentBlock.transform.position.x + offsetX, -_aimLimit.x, _aimLimit.x), 0, 0);
 
         _currentBlock.transform.position = pos;
+        _aim.position = pos;
+
         _isAlreadyAim = true;
     }
 
