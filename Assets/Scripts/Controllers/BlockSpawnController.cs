@@ -32,8 +32,9 @@ public class BlockSpawnController : MonoBehaviour
     public void SpawnNewBlock()
     {
         NumberBlock block = Instantiate(_blocksDataManager._blockPrefab, Vector3.zero, Quaternion.identity, transform);
+        BlockData blockData = _blocksDataManager.GetDataByPlayerProgress(_blocks);
 
-        block.OnBlockSpawned(_blocksDataManager.GetRandomBlockData(), this);
+        block.OnBlockSpawned(blockData, this);
         block.ChangeRigidbodyState(false);
 
         _blocks.Add(block);
@@ -41,7 +42,7 @@ public class BlockSpawnController : MonoBehaviour
         _currentBlockScaleAnimation = StartCoroutine(BlockScaleAnimatior(block, _blockAnimationSpeed));
     }
 
-    public void SpawnNewBlock(BlockData blockData, Vector3 position)
+    public void SpawnMergeBlock(BlockData blockData, Vector3 position)
     {
         NumberBlock block = Instantiate(_blocksDataManager._blockPrefab, position, Quaternion.identity, transform);
 
@@ -68,7 +69,7 @@ public class BlockSpawnController : MonoBehaviour
 
         _progressController.OnMerge(blockData.BlockCount, blockData.BlockName, middlePos);
 
-        SpawnNewBlock(blockData, middlePos);
+        SpawnMergeBlock(blockData, middlePos);
     }
 
     private IEnumerator BlockScaleAnimatior(NumberBlock block, float animtionSpeed)
