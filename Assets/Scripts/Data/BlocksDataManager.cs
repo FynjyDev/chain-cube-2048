@@ -13,16 +13,6 @@ public class BlocksDataManager : ScriptableObject
 
     [SerializeField] private List<BlockData> _blockDatas;
 
-    public List<BlockData> GetAllBlockDatas()
-    {
-        return _blockDatas;
-    }
-
-    public BlockData GetRandomBlockData()
-    {
-        return _blockDatas[Random.Range(0, _blockDatas.Count)];
-    }
-
     public BlockData GetDataByCount(int count)
     {
         foreach (BlockData bD in _blockDatas)
@@ -32,9 +22,14 @@ public class BlocksDataManager : ScriptableObject
         return null;
     }
 
+    public BlockData GetMaxBlockData()
+    {
+        return _blockDatas[_blockDatas.Count - 1];
+    }
+
     public BlockData GetDataByPlayerProgress(List<NumberBlock> currentBlocks)
     {
-        BlockData maxBlockData = GetMaxBlockData(currentBlocks);
+        BlockData maxBlockData = GetMaxBlockDataFromList(currentBlocks);
 
         int maxExlusive = _minStartIndex;
         int maxBlockDataIndex = _blockDatas.IndexOf(maxBlockData);
@@ -45,7 +40,7 @@ public class BlocksDataManager : ScriptableObject
         return _blockDatas[Random.Range(0, maxExlusive)];
     }
 
-    public BlockData GetMaxBlockData(List<NumberBlock> currentBlocks)
+    public BlockData GetMaxBlockDataFromList(List<NumberBlock> currentBlocks)
     {
         List<BlockData> blockDatas = new List<BlockData>();
         currentBlocks.ForEach(x => blockDatas.Add(x.GetBlockData()));

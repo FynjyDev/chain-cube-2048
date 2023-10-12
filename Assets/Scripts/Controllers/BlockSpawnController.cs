@@ -58,6 +58,8 @@ public class BlockSpawnController : MonoBehaviour
 
     public void OnMerge(NumberBlock block_1, NumberBlock block_2)
     {
+        int blocksAmount = block_1.GetBlockData().BlockCount + block_2.GetBlockData().BlockCount;
+
         Vector3 middlePos = (block_1.transform.position + block_2.transform.position) / 2;
         BlockData blockData = _blocksDataManager.GetDataByCount(block_1.GetBlockData().BlockCount + block_2.GetBlockData().BlockCount);
 
@@ -67,8 +69,13 @@ public class BlockSpawnController : MonoBehaviour
         Destroy(block_1.gameObject);
         Destroy(block_2.gameObject);
 
-        _progressController.OnMerge(blockData.BlockCount, blockData.BlockName, middlePos);
+        if (blockData == null)
+        {
+            _progressController.OnMerge(blocksAmount, "Max", middlePos);
+            return;
+        }
 
+        _progressController.OnMerge(blockData.BlockCount, blockData.BlockName, middlePos);
         SpawnMergeBlock(blockData, middlePos);
     }
 
