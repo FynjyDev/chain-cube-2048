@@ -20,6 +20,7 @@ public class BlockShootingController : MonoBehaviour
     private NumberBlock _currentBlock;
 
     private bool _isAlreadyAim;
+    private bool _aimEnabled;
 
     private void OnEnable()
     {
@@ -30,11 +31,13 @@ public class BlockShootingController : MonoBehaviour
     {
         _blockSpawnController = blockSpawnController;
         _deadLine = deadLine;
+
+        _aimEnabled = true;
     }
 
     public void FixedUpdate()
     {
-        if (!_currentBlock) return;
+        if (!_currentBlock || !_aimEnabled) return;
 
         _aim.gameObject.SetActive(Input.GetMouseButton(0));
 
@@ -81,6 +84,7 @@ public class BlockShootingController : MonoBehaviour
     private void DisableAim()
     {
         _aim.gameObject.SetActive(false);
+        _aimEnabled = false;
     }
 
     private void OnDisable()

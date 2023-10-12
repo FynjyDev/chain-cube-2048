@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateController : MonoBehaviour
 {
@@ -38,5 +39,11 @@ public class GameStateController : MonoBehaviour
     public void OnApplicationQuit()
     {
         OnGameQuit?.Invoke();
+    }
+
+    public void ReloadGame()
+    {
+        OnGameQuit?.Invoke();
+        SceneManager.LoadScene(0);
     }
 }

@@ -23,7 +23,7 @@ public class BlockSpawnController : MonoBehaviour
 
     private void OnEnable()
     {
-        GameStateController.OnGameEnd += ClearMap;
+        GameStateController.OnGameEnd += ClearBlocks;
     }
 
     public void Init(List<BlockSaveData> blockSaveData, BlockShootingController shootingController, ProgressController progressController, BlocksDataManager dataManager)
@@ -34,6 +34,11 @@ public class BlockSpawnController : MonoBehaviour
 
         foreach (BlockSaveData data in blockSaveData) CreateBlock(data.MapBlocksPosition, data.MapBlockData);            
         SpawnNewBlock();
+    }
+
+    private void ClearBlocks()
+    {
+        _blocks.Clear();
     }
 
     private void ClearMap()
@@ -130,6 +135,6 @@ public class BlockSpawnController : MonoBehaviour
 
     private void OnDisable()
     {
-        GameStateController.OnGameEnd -= ClearMap;
+        GameStateController.OnGameEnd -= ClearBlocks;
     }
 }
