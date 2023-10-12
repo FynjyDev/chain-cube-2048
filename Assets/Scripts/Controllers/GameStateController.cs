@@ -10,6 +10,7 @@ public class GameStateController : MonoBehaviour
     public BlockSpawnController BlockSpawnController;
     public ProgressController ProgressController;
     public SaveLoadController SaveLoadController;
+    public UIController UIController;
     public DeadLine DeadLine;
 
     public static event Action OnGameStart;
@@ -27,7 +28,7 @@ public class GameStateController : MonoBehaviour
 
         DeadLine.Init(this);
         BlockShootingController.Init(BlockSpawnController, DeadLine);
-        ProgressController.Init(saveData == null ? 0 : saveData.CurrentScores);
+        ProgressController.Init(saveData == null ? 0 : saveData.CurrentScores, UIController);
         BlockSpawnController.Init(saveData == null ? new List<BlockSaveData>() : saveData.BlockSaveData, BlockShootingController, ProgressController, BlocksDataManager);
     }
 

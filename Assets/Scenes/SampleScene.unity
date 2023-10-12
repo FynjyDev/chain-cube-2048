@@ -1438,7 +1438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aim: {fileID: 715387903}
-  _aimMoveSpeed: 0.2
+  _aimMoveSpeed: 0.025
   _aimLimit: {x: 1.5, y: 0, z: 0}
   _shootForce: {x: 0, y: 0, z: 700}
 --- !u!1 &1063189712
@@ -1752,6 +1752,7 @@ MonoBehaviour:
   BlockSpawnController: {fileID: 248305165}
   ProgressController: {fileID: 2072524778}
   SaveLoadController: {fileID: 142661500}
+  UIController: {fileID: 317228789}
   DeadLine: {fileID: 1738055236}
 --- !u!4 &1307012357
 Transform:
@@ -2241,8 +2242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timerSlider: {fileID: 1676050939}
   _deadTime: 3
-  collisionCount: 0
-  currentTime: 0
 --- !u!1 &1774981193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,5 +2668,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mergeEffect: {fileID: 6289383562537114726, guid: f67ddf4342deef344bf6541da8381ede,
     type: 3}
-  _uiController: {fileID: 317228789}
-  _scoresCount: 0

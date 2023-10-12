@@ -7,12 +7,11 @@ public class DeadLine : MonoBehaviour
     [SerializeField] private float _deadTime;
 
     private NumberBlock _ignoreBlock;
-    private NumberBlock _currentBlock;
 
     private GameStateController _gameStateController;
 
-    public int collisionCount;
-    public float currentTime;
+    private int _collisionCount;
+    private float _currentTime;
 
     public void Init(GameStateController gameStateController)
     {
@@ -24,7 +23,7 @@ public class DeadLine : MonoBehaviour
         NumberBlock block = other.GetComponent<NumberBlock>();
 
         if (block && block != _ignoreBlock)
-            collisionCount++;
+            _collisionCount++;
     }
 
     public virtual void OnTriggerStay(Collider other)
@@ -34,12 +33,12 @@ public class DeadLine : MonoBehaviour
         if (block == null) return;
         if ( block == _ignoreBlock) return;
 
-        currentTime += Time.deltaTime;
-            float _lerpValue = currentTime / _deadTime;
+        _currentTime += Time.deltaTime;
+            float _lerpValue = _currentTime / _deadTime;
 
             _timerSlider.value = Mathf.Lerp(0, 1, _lerpValue);
 
-            if (currentTime >= _deadTime)
+            if (_currentTime >= _deadTime)
                 _gameStateController.GameLose();
     }
 
@@ -50,12 +49,12 @@ public class DeadLine : MonoBehaviour
         if (block == null) return;
         if (block == _ignoreBlock) return;
 
-        if (collisionCount > 0)
-            collisionCount--;
+        if (_collisionCount > 0)
+            _collisionCount--;
 
-        if (collisionCount <= 0)
+        if (_collisionCount <= 0)
         {
-            currentTime = 0;
+            _currentTime = 0;
             _timerSlider.value = 0;
         }
     }

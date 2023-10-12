@@ -5,10 +5,7 @@ public class ProgressController : MonoBehaviour
     [SerializeField]
     private MergeEffect _mergeEffect;
 
-    [SerializeField]
     private UIController _uiController;
-
-    [SerializeField]
     private int _scoresCount;
 
     private void OnEnable()
@@ -16,8 +13,9 @@ public class ProgressController : MonoBehaviour
         GameStateController.OnGameEnd += OnGameEnd;
     }
 
-    public void Init(int scores)
+    public void Init(int scores, UIController uiController)
     {
+        _uiController = uiController;
         UpdateScoresCount(scores);
     }
 

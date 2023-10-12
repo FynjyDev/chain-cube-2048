@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blockPrefab: {fileID: -6321888085549077405, guid: 989528bd23dd4c544990a08a4274e388,
     type: 3}
-  _minStartIndex: 13
+  _minStartIndex: 1
   _interval: 1
   _blockDatas:
   - {fileID: 11400000, guid: 0d5f109ff34a81247b402d8a6cb2f3ba, type: 2}
